@@ -63,6 +63,7 @@ jobs:
     # Step 8: Push docker image to dockerhub
     ####
 
+# Step 3
     - name: Lint Python code
   run: |
     if [ -f .flake8 ] || [ -f setup.cfg ] || [ -f tox.ini ] || [ -f .pep8 ]; then
@@ -70,5 +71,18 @@ jobs:
     else
       echo "No lint configuration found, skipping linting."
     fi
+
+# Step 4
+- name: Run Python tests
+  run: |
+    if [ -f pytest.ini ] || ls tests; then
+      pytest
+    else
+      echo "No tests found, skipping tests."
+    fi
+
+# Step 5
+- name: Build Docker Image
+  run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/backend_flask:latest .
 
     
