@@ -90,7 +90,8 @@ jobs:
   run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login --br1ann4 ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
 - name: Push Docker Image
-  run: docker push ${{ secrets.br1ann4 }}/backend_flask:latest
+  run: docker push br1ann4/backend_flask:tagname
+  #docker push ${{ secrets.br1ann4 }}/backend_flask:latest
 
 
     
